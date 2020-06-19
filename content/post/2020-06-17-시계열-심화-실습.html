@@ -1,0 +1,174 @@
+---
+title: 시계열 심화 실습
+author: 이현탁
+date: '2020-05-19'
+slug: 시계열-심화-실습
+categories:
+  - R
+tags:
+  - R Markdown
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="box-cox-람다추정" class="section level1">
+<h1>1. BOX-COX 람다추정</h1>
+<pre><code>install.packages(&quot;MASS&quot;)
+library(MASS)
+
+
+
+ x &lt;- rexp(1000) # 지수분포로부터 난수 발생
+ x
+ par(mfrow=c(1,2))
+ hist(x)
+ qqnorm(x) # 정규확률그림
+
+
+ par(mfrow=c(1,1))
+ boxcox(x~1) # 로그-가능도 프로파일
+
+
+install.packages(&quot;car&quot;)
+library(car)
+
+ p &lt;- powerTransform(x) # 박스-콕스 변환의 람다 추정
+p
+
+ y &lt;- bcPower(x, p$lambda) # 박스-콕스 변환
+y
+ par(mfrow=c(1,2))
+ hist(y)
+ qqnorm(y) # 변환된 자료의 정규확률그림</code></pre>
+</div>
+<div id="var모형분석" class="section level1">
+<h1>2. VAR모형분석</h1>
+<pre><code>set.seed(123) # Reset random number generator for reasons of reproducability</code></pre>
+<div id="generate-sample" class="section level2">
+<h2>Generate sample</h2>
+<pre><code>t &lt;- 200 # Number of time series observations
+k &lt;- 2 # Number of endogenous variables
+p &lt;- 2 # Number of lags</code></pre>
+</div>
+<div id="generate-coefficient-matrices" class="section level2">
+<h2>Generate coefficient matrices</h2>
+<pre><code>A.1 &lt;- matrix(c(-.3, .6, -.4, .5), k) # Coefficient matrix of lag 1
+A.2 &lt;- matrix(c(-.1, -.2, .1, .05), k) # Coefficient matrix of lag 2
+A &lt;- cbind(A.1, A.2) # Companion form of the coefficient matrices</code></pre>
+</div>
+<div id="generate-series" class="section level2">
+<h2>Generate series</h2>
+<pre><code>series &lt;- matrix(0, k, t + 2*p) # Raw series with zeros
+for (i in (p + 1):(t + 2*p)){ # Generate series with e ~ N(0,0.5)
+  series[, i] &lt;- A.1%*%series[, i-1] + A.2%*%series[, i-2] + rnorm(k, 0, .5)
+}
+
+
+head(series)
+plot.ts(series) # Plot the series</code></pre>
+</div>
+<div id="인과성-검정을-위한-패키지-설치" class="section level2">
+<h2>인과성 검정을 위한 패키지 설치</h2>
+<pre><code>install.packages(&quot;lmtest&quot;)
+library(lmtest)
+grangertest(series[,1]~series[,2], order=2,data=series) #인과성 검정
+grangertest(series[,2]~series[,1], order=2,data=series) #인과성 검정
+
+install.packages(&quot;vars&quot;)
+library(vars) # Load package</code></pre>
+</div>
+<div id="var모형-사용법" class="section level2">
+<h2>var모형 사용법</h2>
+<pre><code>VAR(y, p = 1, type = c(&quot;const&quot;, &quot;trend&quot;, &quot;both&quot;, &quot;none&quot;),
+    season = NULL, exogen = NULL, lag.max = NULL,
+    ic = c(&quot;AIC&quot;, &quot;HQ&quot;, &quot;SC&quot;, &quot;FPE&quot;))
+
+
+VARselect(series) # p=2를 추천 #자동으로 최적의 p구해줌 
+
+var.1 &lt;- VAR(series, p=2, type = &quot;none&quot;)  # Estimate the model #var(P)의 p 결정을 위해 AIC는 시차값을 크게선택하는 경향있으니 HQ나 BIC 추천함
+var.1
+summary(var.1)</code></pre>
+</div>
+</div>
+<div id="추정된계수-한눈에보게-모을때" class="section level1">
+<h1>+ 추정된계수 한눈에보게 모을때</h1>
+<div id="extract-coefficients-standard-errors-etc.-from-the-object" class="section level2">
+<h2>1)Extract coefficients, standard errors etc. from the object</h2>
+</div>
+<div id="produced-by-the-var-function" class="section level2">
+<h2>2)produced by the VAR function</h2>
+<pre><code>est_coefs &lt;- coef(var.1)</code></pre>
+</div>
+<div id="extract-only-the-coefficients-for-both-dependend-variables-and-combine-them-to-a-single-matrix" class="section level2">
+<h2>3)Extract only the coefficients for both dependend variables and combine them to a single matrix</h2>
+<pre><code>est_coefs &lt;- rbind(est_coefs[[1]][, 1], est_coefs[[2]][, 1]) </code></pre>
+</div>
+<div id="print-the-rounded-estimates-in-the-console" class="section level2">
+<h2>4)Print the rounded estimates in the console</h2>
+<pre><code>round(est_coefs, 2)</code></pre>
+</div>
+</div>
+<div id="예측" class="section level1">
+<h1>3.예측</h1>
+<pre><code>predict(var.1, n.ahead=10, ci=0.95)</code></pre>
+<div id="forecast함수-쓰고싶을땐" class="section level2">
+<h2>forecast함수 쓰고싶을땐</h2>
+<pre><code>install.packages(&quot;forecast&quot;)
+library(forecast)
+forecast(var.1) </code></pre>
+</div>
+<div id="calculate-the-irf충격반응함수보기" class="section level2">
+<h2>Calculate the IRF충격반응함수보기</h2>
+<pre><code>ir.1 &lt;- irf(var.1, impulse = &quot;Series.1&quot;, response = &quot;Series.2&quot;, n.ahead = 20, ortho = FALSE)</code></pre>
+</div>
+<div id="plot-the-irf" class="section level2">
+<h2>Plot the IRF</h2>
+<pre><code>plot(ir.1)</code></pre>
+</div>
+</div>
+<div id="r참고논문속의-예제" class="section level1">
+<h1>4. r참고논문속의 예제</h1>
+<pre><code>install.packages(&quot;vars&quot;)
+library(vars) # Load package
+
+data(Canada)
+summary(Canada)</code></pre>
+<div id="시도표" class="section level2">
+<h2>시도표</h2>
+<pre><code>plot.ts(Canada) </code></pre>
+</div>
+<div id="단위근검정시행" class="section level2">
+<h2>단위근검정시행</h2>
+<pre><code>adf1 &lt;- summary(ur.df(Canada[, &quot;prod&quot;], type = &quot;trend&quot;, lags = 2)) #비정상추세있음
+adf1 </code></pre>
+</div>
+<div id="변수들이-차분-1이-필요" class="section level2">
+<h2>변수들이 차분 1이 필요</h2>
+<pre><code>
+VARselect(Canada, lag.max = 8, type = &quot;both&quot;) #시차 2가 가장 큰작은 값을 가짐 </code></pre>
+</div>
+<div id="결과를-보면-각자-다른-차수를-추천" class="section level2">
+<h2>결과를 보면 각자 다른 차수를 추천</h2>
+<pre><code>$selection
+AIC(n)  HQ(n)  SC(n) FPE(n) 
+3      2      1      3 </code></pre>
+</div>
+<div id="sc가-추천해준-시차-1" class="section level2">
+<h2>sc가 추천해준 시차 1</h2>
+<pre><code>Canada &lt;- Canada[, c(&quot;prod&quot;, &quot;e&quot;, &quot;U&quot;, &quot;rw&quot;)]
+p1ct &lt;- VAR(Canada, p = 1, type = &quot;both&quot;)
+p1ct
+summary(p1ct, equation = &quot;e&quot;) #e 시계열만  보여줌
+plot(p1ct, names = &quot;e&quot;)
+
+ser11 &lt;- serial.test(p1ct, lags.pt = 16, type = &quot;PT.asymptotic&quot;) #포트만토검정
+ser11$serial
+
+
+
+var.2c &lt;- VAR(Canada, p = 2, type = &quot;const&quot;)
+predict(var.2c, n.ahead = 8, ci = 0.95)</code></pre>
+</div>
+</div>
