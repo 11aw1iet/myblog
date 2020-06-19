@@ -79,33 +79,32 @@ forecast(TS1,h=10)
 plot(forecast(TS1,h=10))
 </code></pre>
 </div>
-</div>
-<div id="차수-식별" class="section level1">
-<h1>차수 식별</h1>
+<div id="차수-식별" class="section level2">
+<h2>차수 식별</h2>
 <pre><code>install.packages(&quot;forecast&quot;)
 library(forecast)
 auto.arima(Y)</code></pre>
 </div>
+</div>
 <div id="실습2" class="section level1">
 <h1>실습2</h1>
-<pre><code>x&lt;-arima.sim(list(ma=0.7), n=200)
+<pre><code>x&lt;-arima.sim(list(ma=0.7), n=100)
 par(mfrow=c(2,1))
 acf(x, main=&quot;ACF &quot;)
 pacf(x, main=&quot;PACF &quot;)</code></pre>
-</div>
-<div id="모수-추정하기" class="section level1">
-<h1>모수 추정하기</h1>
+<div id="모수-추정하기" class="section level2">
+<h2>모수 추정하기</h2>
 <pre><code>TS2 &lt;- arima(x, c(0, 0, 1))
 TS2
 auto.arima(x)
 </code></pre>
 </div>
-<div id="모형의-진단" class="section level1">
-<h1>모형의 진단</h1>
+<div id="모형의-진단" class="section level2">
+<h2>모형의 진단</h2>
 <pre><code>tsdiag(TS2,gof.lag=20)</code></pre>
 </div>
-<div id="모형의-예측" class="section level1">
-<h1>모형의 예측</h1>
+<div id="모형의-예측" class="section level2">
+<h2>모형의 예측</h2>
 <pre><code>future20&lt;-predict(TS2, n.ahead=20)
 future20
 Upper &lt;- future20$pred+future20$se
@@ -116,25 +115,26 @@ forecast(TS2,h=20)
 plot(forecast(TS2,h=20))
 </code></pre>
 </div>
+</div>
 <div id="실습3" class="section level1">
 <h1>실습3</h1>
-<pre><code>ARMA&lt;-arima.sim(list(ar=0.5, ma=0.8), n=200)
+<pre><code>ARMA&lt;-arima.sim(list(ar=0.3, ma=0.7), n=100)
 ts.plot(ARMA)
 par(mfrow=c(1,2))
 acf(ARMA)
 pacf(ARMA)
 
 
-fit1 &lt;- arima(ARMA, c(0, 0, 2))
-fit1
-fit2 &lt;- arima(ARMA, c(1, 0, 1))
-fit2
-summary(fit2)
+arm1 &lt;- arima(ARMA, c(0, 0, 2))
+arm1
+arm2 &lt;- arima(ARMA, c(1, 0, 1))
+arm2
+summary(arm1)
 auto.arima(ARMA) 
-tsdiag(fit2,gof.lag=36)
+tsdiag(arm,gof.lag=36)
 
-forecast(fit2,h=20)
-plot(forecast(fit1,h=20))
+forecast(arm1,h=20)
+plot(forecast(arm2,h=20))
 </code></pre>
 </div>
 <div id="실습4" class="section level1">
@@ -152,43 +152,43 @@ par(mfrow=c(2,1))
 acf(stock,main=&quot;ACF&quot;, lag=36)
 pacf(stock,main=&quot;PACF&quot;, lag=36)
 </code></pre>
-</div>
-<div id="log변환" class="section level1">
-<h1>log변환</h1>
+<div id="log변환" class="section level2">
+<h2>log변환</h2>
 <pre><code>logstock&lt;-log(stock)
 plot(logstock)</code></pre>
 </div>
-<div id="log변환-후-1차-차분시도" class="section level1">
-<h1>log변환 후 1차 차분시도</h1>
+<div id="log변환-후-1차-차분시도" class="section level2">
+<h2>log변환 후 1차 차분시도</h2>
 <pre><code>diff_logstock&lt;-diff(logstock, lag=1)
 plot(diff_logstock)</code></pre>
 </div>
-<div id="acf-pacf" class="section level1">
-<h1>acf, pacf</h1>
+<div id="acf-pacf" class="section level2">
+<h2>acf, pacf</h2>
 <pre><code>par(mfrow=c(2,1))
 acf(diff_logstock,main=&quot;ACF&quot;, lag=36)
 pacf(diff_logstock,main=&quot;PACF&quot;, lag=36, ylim=c(-0.2,1))</code></pre>
 </div>
-<div id="모형-선택" class="section level1">
-<h1>모형 선택</h1>
+<div id="모형-선택" class="section level2">
+<h2>모형 선택</h2>
 <pre><code>auto.arima(diff_logstock) # 자동으로 차수및 모수결정
 
-fit3&lt;-arima(logstock,c(2,1,2)) #AUTO.ARIMA에서 알려준대로
-fit3</code></pre>
+arm3&lt;-arima(logstock,c(2,1,2)) #AUTO.ARIMA에서 알려준대로
+arm3</code></pre>
 </div>
-<div id="잔차검정" class="section level1">
-<h1>잔차검정</h1>
-<pre><code>tsdiag(fit3)</code></pre>
+<div id="잔차검정" class="section level2">
+<h2>잔차검정</h2>
+<pre><code>tsdiag(arm3)</code></pre>
 </div>
-<div id="예측값-포함된-plot" class="section level1">
-<h1>예측값 포함된 plot</h1>
-<pre><code>forecast(fit3)
-plot(forecast(fit3))
+<div id="예측값-포함된-plot" class="section level2">
+<h2>예측값 포함된 plot</h2>
+<pre><code>forecast(arm3)
+plot(forecast(arm3))
 
-pred&lt;-predict(fit3, n.ahead=20)
+pred&lt;-predict(arm3, n.ahead=20)
 pred
 ts.plot(stock, 2.718^pred$pred, lty=c(1,3))
 </code></pre>
+</div>
 </div>
 <div id="실습5" class="section level1">
 <h1>실습5</h1>
@@ -217,12 +217,12 @@ auto.arima(log_diff12_air) # 자동으로 차수및 모수결정
 
 tsdiag(auto.arima(diff(logair)))
 
-fit&lt;-arima(logair,c(0,1,1), seasonal=list(order=c(0,1,1),period=12))
-fit
+arm&lt;-arima(logair,c(0,1,1), seasonal=list(order=c(0,1,1),period=12))
+arm
 
-tsdiag(fit)
+tsdiag(arm)
 
-pred&lt;-predict(fit, n.ahead=10*12)
+pred&lt;-predict(arm, n.ahead=10*12)
 pred
 ts.plot(AirPassengers, 2.718^pred$pred, lty=c(1,3))</code></pre>
 </div>

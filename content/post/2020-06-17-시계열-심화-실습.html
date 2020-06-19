@@ -12,22 +12,22 @@ tags:
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<div id="box-cox-람다추정" class="section level1">
-<h1>1. BOX-COX 람다추정</h1>
+<div id="box-cox-람다추정-하는법" class="section level1">
+<h1>BOX-COX 람다추정 하는법</h1>
 <pre><code>install.packages(&quot;MASS&quot;)
 library(MASS)
 
 
 
- x &lt;- rexp(1000) # 지수분포로부터 난수 발생
+ x &lt;- rexp(1000) # 지수분포로부터 난수를 발생시킨다.
  x
  par(mfrow=c(1,2))
  hist(x)
- qqnorm(x) # 정규확률그림
+ qqnorm(x) # 정규확률그림 생성
 
 
  par(mfrow=c(1,1))
- boxcox(x~1) # 로그-가능도 프로파일
+ boxcox(x~1) # 로그-가능도 프로파일 생성
 
 
 install.packages(&quot;car&quot;)
@@ -40,14 +40,14 @@ p
 y
  par(mfrow=c(1,2))
  hist(y)
- qqnorm(y) # 변환된 자료의 정규확률그림</code></pre>
+ qqnorm(y) # 변환된 자료의 정규확률그림 생성</code></pre>
 </div>
 <div id="var모형분석" class="section level1">
-<h1>2. VAR모형분석</h1>
-<pre><code>set.seed(123) # Reset random number generator for reasons of reproducability</code></pre>
-<div id="generate-sample" class="section level2">
-<h2>Generate sample</h2>
-<pre><code>t &lt;- 200 # Number of time series observations
+<h1>VAR모형분석</h1>
+<div id="샘플을-생성한다" class="section level2">
+<h2>샘플을 생성한다</h2>
+<pre><code>set.seed(111)
+t &lt;- 200 # Number of time series observations
 k &lt;- 2 # Number of endogenous variables
 p &lt;- 2 # Number of lags</code></pre>
 </div>
@@ -95,23 +95,23 @@ summary(var.1)</code></pre>
 <div id="추정된계수-한눈에보게-모을때" class="section level1">
 <h1>+ 추정된계수 한눈에보게 모을때</h1>
 <div id="extract-coefficients-standard-errors-etc.-from-the-object" class="section level2">
-<h2>1)Extract coefficients, standard errors etc. from the object</h2>
+<h2>Extract coefficients, standard errors etc. from the object</h2>
 </div>
 <div id="produced-by-the-var-function" class="section level2">
-<h2>2)produced by the VAR function</h2>
+<h2>produced by the VAR function</h2>
 <pre><code>est_coefs &lt;- coef(var.1)</code></pre>
 </div>
 <div id="extract-only-the-coefficients-for-both-dependend-variables-and-combine-them-to-a-single-matrix" class="section level2">
-<h2>3)Extract only the coefficients for both dependend variables and combine them to a single matrix</h2>
+<h2>Extract only the coefficients for both dependend variables and combine them to a single matrix</h2>
 <pre><code>est_coefs &lt;- rbind(est_coefs[[1]][, 1], est_coefs[[2]][, 1]) </code></pre>
 </div>
 <div id="print-the-rounded-estimates-in-the-console" class="section level2">
-<h2>4)Print the rounded estimates in the console</h2>
+<h2>Print the rounded estimates in the console</h2>
 <pre><code>round(est_coefs, 2)</code></pre>
 </div>
 </div>
 <div id="예측" class="section level1">
-<h1>3.예측</h1>
+<h1>예측</h1>
 <pre><code>predict(var.1, n.ahead=10, ci=0.95)</code></pre>
 <div id="forecast함수-쓰고싶을땐" class="section level2">
 <h2>forecast함수 쓰고싶을땐</h2>
@@ -129,7 +129,7 @@ forecast(var.1) </code></pre>
 </div>
 </div>
 <div id="r참고논문속의-예제" class="section level1">
-<h1>4. r참고논문속의 예제</h1>
+<h1>r참고논문속의 예제</h1>
 <pre><code>install.packages(&quot;vars&quot;)
 library(vars) # Load package
 

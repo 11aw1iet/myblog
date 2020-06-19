@@ -6,11 +6,11 @@
 <meta name="generator" content="Hugo 0.72.0" />
 
 
-<title>github으로 페이지 만들기 - A Hugo website</title>
-<meta property="og:title" content="github으로 페이지 만들기 - A Hugo website">
+<title>github으로 페이지 만들기 - 이현탁의 블로그</title>
+<meta property="og:title" content="github으로 페이지 만들기 - 이현탁의 블로그">
 
 
-  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+  <link href='/favico.png' rel='icon' type='image/x-icon'/>
 
 
 
@@ -19,6 +19,11 @@
 
 
 
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
 
 
 
@@ -43,9 +48,7 @@
     
     <li><a href="/about/">About</a></li>
     
-    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
-    
-    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    <li><a href="https://github.com/11aw1iet">GitHub</a></li>
     
   </ul>
 </nav>
@@ -57,7 +60,7 @@
 
   <article class="article">
     
-    <span class="article-duration">0 min read</span>
+    <span class="article-duration">2 min read</span>
     
 
     <h1 class="article-title">github으로 페이지 만들기</h1>
@@ -71,8 +74,153 @@
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<div id="section" class="section level1">
-<h1></h1>
+<div id="github.io가-url에-들어가는-페이지를-보셨나요" class="section level1">
+<h1>.github.io가 url에 들어가는 페이지를 보셨나요?</h1>
+<ul>
+<li>간단하게 만들 수 있으면서 깔끔하고 아주 편하다</li>
+<li>설치할 필요가 따로 없다</li>
+<li>매우 많은 수의 테마를 골라 사용할 수 있다</li>
+</ul>
+</div>
+<div id="새-github-저장소repository-만들기" class="section level1">
+<h1>새 github 저장소(repository) 만들기</h1>
+<ul>
+<li>개인 페이지일 경우 github username 뒤에 .github.io 붙여 이름을 짓는다</li>
+<li>프로젝트 페이지일 경우 아무 이름이나 넣어도 된다. 이 경우 username.github.io/projectname의 형태가 된다.</li>
+</ul>
+</div>
+<div id="선택원하는-jekyll-테마-선택" class="section level1">
+<h1>(선택)원하는 jekyll 테마 선택</h1>
+<ul>
+<li><a href="https://github.com/topics/jekyll-theme">여기</a>에서 구할 수 있다.</li>
+</ul>
+</div>
+<div id="config.yml-만들기" class="section level1">
+<h1>_config.yml 만들기</h1>
+<ul>
+<li>테마를 지정했다면 테마 저장소에서 가져올 수 있다.</li>
+</ul>
+<pre><code>highlighter: rouge
+# text highlighter로 rouge이용
+# 2016.02월 이후로 syntax highlighter는 rouge만 지원.
+# Pygments 사용불가.
+
+paginate: 
+# 작성한 모든 post를 하나의 페이지에 열거할 수 없으니
+# pagination이 필요하고 몇개의 post를 하나의 page에서
+# 보여줄 건지를 설정.
+
+language: 
+# 언어 설정
+
+url:
+# Google Search Console에서 사용하는 sitemap.xml 생성시
+# 이 url key값이 존재하지 않으면 sitemap.xml이
+# 정상적으로 생성되지 않는다.
+# 또한 disqus(댓글시스템)를 이용하기 위해서도 필요.
+# 자신의 github page url을 입력
+# ( https://your_github_id.github.io 형식 )
+
+baseurl: /
+
+# Website info
+title:
+# 자신의 blog title.
+
+description:
+# blog home에 표시될 blog에 대한 전반적인 설명.
+
+cover:
+# blog home에 표시될 blog cover image.
+
+logo:
+logo_dark:
+
+favicon:
+# favicon으로 사용할 image
+
+production_url:
+# 최종적으로 blog가 운영될 url
+
+source_url:
+# blogmaker(jekyll source folder)에 대한 github repository
+
+# Social info
+navigation:
+# Navigation bar link를 보여줄건지 여부
+
+subscribers:
+# subscriber 기능을 사용할건지의 여부
+# 저는 약간의 수정을 통해 subscriber 기능대신
+# lunr.js를 이용한 검색 기능으로 대체 사용했습니다.
+# 검색기능으로 대체하기 위해서
+# `_includes/subscribe-form.html` 파일의 수정이 필요합니다.
+
+twitter:
+facebook:
+# 만약 twitter와 facebook을 이용하면 username을 입력
+
+# Disqus
+disqus: 
+disqus_shortname: 
+# disqus는 온라인 댓글 시스템. 댓글 기능을 사용하기 위해
+# disqus를 이용할 것인지 여부와 만약 사용하면
+# disqus shortname을 입력 ( disqus username이 아님 )
+
+
+# Google Analytics
+google_analytics:
+# Google Analytics을 사용할 경우 GA tracking identifier를 입력
+
+# Permalinks
+permalink:
+# permalink:
+# permalink:
+# 각각의 post에 고정주소를 어떤 방식으로 할당할 것인지를 결정
+# 이 값을 바꾸면 작성한 포스트의 저장위치나 파일이름이 변경된다.
+
+# gems and other configs
+plugins: 
+
+feed:
+  path: 
+
+# Travis-CI 설정입니다.
+safe:
+lsi: 
+
+username:
+repo:
+# username : travis-ci와 연동하는 github의 username
+# repo: travis-ci와 연동하는 github의 repository이름
+# https://github.com/&lt;username&gt;/&lt;repository&gt;
+
+branch:
+# 사용할 branch명
+
+relative_source:
+
+destination: ./output/
+# compile된 결과가 생성되는 폴더
+# 이 폴더안의 내용이 우리가 운영하는 블로그 내용이 컴파일되서 들어간다.
+# 이 폴더안의 내용을 github repository(https://username.github.io)에 push
+# 만약 Travis-CI를 이용할 예정이면 이 부분을 git submodule로
+# github repository(https://username.github.io)에 연결해야 한다.
+
+
+# exclude는 Jekyll컴파일 시 destination에 포함될 필요가
+# 없는것들을 명시한다. (node_modules와 필요없는 것들은 제외)
+exclude:</code></pre>
+</div>
+<div id="config-설정까지-완료했다면" class="section level1">
+<h1>config 설정까지 완료했다면</h1>
+<ul>
+<li>마크다운 문서를 html로 knit해서 github에 push한다.</li>
+<li>기본 설정을 건드리지 않았다면 으로 해당 repo의 맨 윗 폴더의 index.html 이 페이지의 내용이 된다.</li>
+</ul>
+</div>
+<div id="결과물-예시" class="section level1">
+<h1><a href="https://11aw1iet.github.io/rhino/">결과물 예시</a></h1>
 </div>
 
     </div>
@@ -96,6 +244,18 @@
 
     </div>
     
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
 
     
 
