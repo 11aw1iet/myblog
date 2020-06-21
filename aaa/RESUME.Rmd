@@ -1,12 +1,10 @@
 ---
-title: RESUME
-author: 이현탁
-date: '2020-06-18'
+title: "RESUME"
+author: ''
+date: '2020-06-20'
 slug: resume
-categories:
-  - R
-tags:
-  - R Markdown
+tags: R Markdown
+categories: R
 ---
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(pdftools)

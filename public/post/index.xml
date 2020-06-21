@@ -6,19 +6,10 @@
     <description>Recent content in Posts on 이현탁의 블로그</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>RESUME</title>
-      <link>/2020/06/20/resume/</link>
-      <pubDate>Sat, 20 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/06/20/resume/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>github으로 페이지 만들기</title>
@@ -27,6 +18,15 @@
       
       <guid>/2020/06/18/github%EC%9C%BC%EB%A1%9C-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%A7%8C%EB%93%A4%EA%B8%B0/</guid>
       <description>.github.io가 url에 들어가는 페이지를 보셨나요?간단하게 만들 수 있으면서 깔끔하고 아주 편하다설치할 필요가 따로 없다매우 많은 수의 테마를 골라 사용할 수 있다새 github 저장소(repository) 만들기개인 페이지일 경우 github username 뒤에 .github.io 붙여 이름을 짓는다프로젝트 페이지일 경우 아무 이름이나 넣어도 된다. 이 경우 username.github.io/projectname의 형태가 된다.(선택)원하는 jekyll 테마 선택여기에서 구할 수 있다._config.yml 만들기테마를 지정했다면 테마 저장소에서 가져올 수 있다.</description>
+    </item>
+    
+    <item>
+      <title>RESUME</title>
+      <link>/2020/06/18/resume/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/18/resume/</guid>
+      <description></description>
     </item>
     
     <item>
