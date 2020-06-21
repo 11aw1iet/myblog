@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>RESUME</title>
+      <link>/resume/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/resume/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>blogdown으로 블로그 만들어서 테마 적용시키기</title>
       <link>/2020/06/16/blogdown%EC%9C%BC%EB%A1%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A7%8C%EB%93%A4%EC%96%B4%EC%84%9C-%ED%85%8C%EB%A7%88-%EC%A0%81%EC%9A%A9%EC%8B%9C%ED%82%A4%EA%B8%B0/</link>
       <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
