@@ -1,62 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>R Markdown on 이현탁의 블로그</title>
-    <link>/tags/r-markdown/</link>
-    <description>Recent content in R Markdown on 이현탁의 블로그</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>github으로 페이지 만들기</title>
-      <link>/2020/06/18/github%EC%9C%BC%EB%A1%9C-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%A7%8C%EB%93%A4%EA%B8%B0/</link>
-      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/06/18/github%EC%9C%BC%EB%A1%9C-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%A7%8C%EB%93%A4%EA%B8%B0/</guid>
-      <description>.github.io가 url에 들어가는 페이지를 보셨나요?간단하게 만들 수 있으면서 깔끔하고 아주 편하다설치할 필요가 따로 없다매우 많은 수의 테마를 골라 사용할 수 있다새 github 저장소(repository) 만들기개인 페이지일 경우 github username 뒤에 .github.io 붙여 이름을 짓는다프로젝트 페이지일 경우 아무 이름이나 넣어도 된다. 이 경우 username.github.io/projectname의 형태가 된다.(선택)원하는 jekyll 테마 선택여기에서 구할 수 있다._config.yml 만들기테마를 지정했다면 테마 저장소에서 가져올 수 있다.</description>
-    </item>
-    
-    <item>
-      <title>RESUME</title>
-      <link>/resume/</link>
-      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/resume/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>blogdown으로 블로그 만들어서 테마 적용시키기</title>
-      <link>/2020/06/16/blogdown%EC%9C%BC%EB%A1%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A7%8C%EB%93%A4%EC%96%B4%EC%84%9C-%ED%85%8C%EB%A7%88-%EC%A0%81%EC%9A%A9%EC%8B%9C%ED%82%A4%EA%B8%B0/</link>
-      <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/06/16/blogdown%EC%9C%BC%EB%A1%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A7%8C%EB%93%A4%EC%96%B4%EC%84%9C-%ED%85%8C%EB%A7%88-%EC%A0%81%EC%9A%A9%EC%8B%9C%ED%82%A4%EA%B8%B0/</guid>
-      <description>#1 blogdown 및 Hugo 설치하기
-r studio에서 간단한 명령어를 통해 설치 가능하다.install.packages(&amp;quot;blogdown&amp;quot;)blogdown::install_hugo(version = latest)#2 Hugo theme 고르기
-여기에서 원하는 테마를 고른다. 각 테마마다 설치방법이 다르지만, 공유되는 과정은 다음과 같다. 아래의 과정은 git bash로 수행한다.# 프로젝트 폴더를 만들어 작업공간으로 지정한다$ cd HUGO_PROJECT# 원하는 테마를 clone해온다$ git clone https://github.com/제작자/테마.git themes/테마# 혹은 submodule로 가져올 수도 있다. netlify 연결을 위해서는 이 편이 낫다.</description>
-    </item>
-    
-    <item>
-      <title>시계열 심화 실습</title>
-      <link>/2020/05/19/%EC%8B%9C%EA%B3%84%EC%97%B4-%EC%8B%AC%ED%99%94-%EC%8B%A4%EC%8A%B5/</link>
-      <pubDate>Tue, 19 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/05/19/%EC%8B%9C%EA%B3%84%EC%97%B4-%EC%8B%AC%ED%99%94-%EC%8B%A4%EC%8A%B5/</guid>
-      <description>BOX-COX 람다추정 하는법install.packages(&amp;quot;MASS&amp;quot;)library(MASS)x &amp;lt;- rexp(1000) # 지수분포로부터 난수를 발생시킨다.xpar(mfrow=c(1,2))hist(x)qqnorm(x) # 정규확률그림 생성par(mfrow=c(1,1))boxcox(x~1) # 로그-가능도 프로파일 생성install.packages(&amp;quot;car&amp;quot;)library(car)p &amp;lt;- powerTransform(x) # 박스-콕스 변환의 람다 추정py &amp;lt;- bcPower(x, p$lambda) # 박스-콕스 변환ypar(mfrow=c(1,2))hist(y)qqnorm(y) # 변환된 자료의 정규확률그림 생성VAR모형분석샘플을 생성한다set.seed(111)t &amp;lt;- 200 # Number of time series observationsk &amp;lt;- 2 # Number of endogenous variablesp &amp;lt;- 2 # Number of lagsGenerate coefficient matricesA.</description>
-    </item>
-    
-    <item>
-      <title>ARIMA 실습</title>
-      <link>/2020/04/17/arima-%EC%8B%A4%EC%8A%B5/</link>
-      <pubDate>Fri, 17 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/04/17/arima-%EC%8B%A4%EC%8A%B5/</guid>
-      <description>기초단계install.packages(&amp;quot;forecast&amp;quot;)library(forecast)AR(1)생성하기x&amp;lt;-arima.sim(list(ma=0.2), n=100)ts.plot(x, main=&amp;quot;x&amp;quot;)par(mfrow=c(3,1))acf(x, main=&amp;quot;ACF&amp;quot;)pacf(x, main=&amp;quot;PACF&amp;quot;)MA(1)생성하기x&amp;lt;-arima.sim(list(ma=0.8), n=100)ts.plot(x, main=&amp;quot;x&amp;quot;)par(mfrow=c(3,1))acf(x, main=&amp;quot;ACF &amp;quot;)pacf(x, main=&amp;quot;PACF &amp;quot;)ARMA(1,1)생성하기x&amp;lt;-arima.sim(list(ar=0.4, ma=-0.3), n=100)ts.plot(x, main=&amp;quot;x&amp;quot;)par(mfrow=c(3,1))acf(x, main=&amp;quot;ACF &amp;quot;)pacf(x, main=&amp;quot;PACF &amp;quot;) 실습Y&amp;lt;-arima.sim(list(order=c(2,0,0), ar=c(0.3, 0.1)), n=100)모형 식별하기ts.plot(Y)par(mfrow=c(2,1))acf(Y, main=&amp;quot;ACF &amp;quot;)pacf(Y, main=&amp;quot;PACF &amp;quot;)모수 추정해보기TS1 &amp;lt;- arima(Y, c(2, 0, 0))TS1TS1 &amp;lt;- arima(Y, c(2, 0, 0), method=c(&amp;quot;CSS-ML&amp;quot;))TS1TS1 &amp;lt;- arima(Y, c(2, 0, 0), method=c(&amp;quot;ML&amp;quot;))TS1TS1 &amp;lt;- arima(Y, c(2, 0, 0), method=c(&amp;quot;CSS&amp;quot;))TS1모형 진단해보기tsdiag(TS1, gof.</description>
-    </item>
-    
-  </channel>
-</rss>
