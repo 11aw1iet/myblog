@@ -1,0 +1,107 @@
+---
+title: ARIMA ex2
+author: 이현탁
+date: '2020-04-21'
+slug: arima-ex2
+categories:
+  - R
+tags:
+  - R Markdown
+---
+# 기초단계
+
+```{r, echo=FALSE, message=FALSE}
+library(forecast)
+```
+# 실습2
+```{r}
+x<-arima.sim(list(ma=0.7), n=100)
+par(mfrow=c(2,1))
+acf(x, main="ACF ")
+pacf(x, main="PACF ")
+```
+
+## 모수 추정하기
+```{r}
+TS2 <- arima(x, c(0, 0, 1))
+TS2
+auto.arima(x)
+
+```
+## 모형의 진단
+```{r}
+tsdiag(TS2,gof.lag=20)
+```
+
+## 모형의 예측
+```{r}
+future20<-predict(TS2, n.ahead=20)
+future20
+Upper <- future20$pred+future20$se
+Lower <- future20$pred-future20$se
+Upper
+Lower
+forecast(TS2,h=20)
+plot(forecast(TS2,h=20))
+
+```
+
+# 실습3
+```{r}
+ARMA<-arima.sim(list(ar=0.3, ma=0.7), n=100)
+ts.plot(ARMA)
+par(mfrow=c(1,2))
+acf(ARMA)
+pacf(ARMA)
+
+
+arm1 <- arima(ARMA, c(0, 0, 2))
+arm1
+arm2 <- arima(ARMA, c(1, 0, 1))
+arm2
+summary(arm1)
+auto.arima(ARMA) 
+tsdiag(arm1,gof.lag=36)
+
+forecast(arm1,h=20)
+plot(forecast(arm2,h=20))
+
+```
+
+# 실습4
+```{r}
+AirPassengers
+plot(AirPassengers) #시도표 그리기
+plot(stl(AirPassengers, s.window="periodic"))
+
+
+logair<-log(AirPassengers) #분산안정화를 위해 log변환시킴
+plot(logair)
+
+log_diff1_air<-diff(logair)  #1차분시도
+plot(log_diff1_air)
+
+plot(stl(log_diff1_air, s.window="periodic"))
+
+log_diff12_air<-diff(log_diff1_air, differences=12) #계절차분시도
+plot(log_diff12_air)
+
+par(mfrow=c(2,1))
+acf(log_diff12_air,main="ACF" )
+pacf(log_diff12_air,main="PACF") 
+
+
+auto.arima(log_diff12_air) # 자동으로 차수및 모수결정
+
+tsdiag(auto.arima(diff(logair)))
+
+arm<-arima(logair,c(0,1,1), seasonal=list(order=c(0,1,1),period=12))
+arm
+
+tsdiag(arm)
+
+pred<-predict(arm, n.ahead=10*12)
+pred
+zz <- ts.plot(AirPassengers, 2.718^pred$pred, lty=c(1,3))
+zz
+```

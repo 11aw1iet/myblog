@@ -1,0 +1,102 @@
+---
+title: 시계열 심화
+author: 이현탁
+date: '2020-05-19'
+slug: 시계열-심화
+categories:
+  - R
+tags:
+  - R Markdown
+---
+```{r, echo=FALSE, message=FALSE}
+library(vars)
+library(lmtest)
+library(car)
+library(forecast)
+library(MASS)
+```
+# BOX-COX 람다추정 하는법
+```{r}
+ x <- rexp(1000) # 지수분포로부터 난수를 발생시킨다.
+ 
+ par(mfrow=c(1,2))
+ hist(x)
+ qqnorm(x) # 정규확률그림 생성
+
+
+ par(mfrow=c(1,1))
+ boxcox(x~1) # 로그-가능도 프로파일 생성
+
+
+
+ p <- powerTransform(x) # 박스-콕스 변환의 람다 추정
+p
+
+ y <- bcPower(x, p$lambda) # 박스-콕스 변환
+
+ par(mfrow=c(1,2))
+ hist(y)
+ qqnorm(y) # 변환된 자료의 정규확률그림 생성
+``` 
+ 
+ 
+ 
+ 
+# VAR모형분석
+
+## 샘플을 생성한다
+```{r}
+set.seed(111)
+t <- 200 # Number of time series observations
+k <- 2 # Number of endogenous variables
+p <- 2 # Number of lags
+```
+## 상관계수 행렬 생성
+```{r}
+A.1 <- matrix(c(-.3, .6, -.4, .5), k) # Coefficient matrix of lag 1
+A.2 <- matrix(c(-.1, -.2, .1, .05), k) # Coefficient matrix of lag 2
+A <- cbind(A.1, A.2) # Companion form of the coefficient matrices
+```
+
+# 예제 2
+```{r}
+data(Canada)
+summary(Canada)
+```
+## 시도표
+```{r}
+plot.ts(Canada) 
+```
+## 단위근검정시행
+```{r}
+adf1 <- summary(ur.df(Canada[, "prod"], type = "trend", lags = 2)) #비정상추세있음
+adf1 
+```
+## 변수들이 차분 1이 필요
+```{r}
+
+VARselect(Canada, lag.max = 8, type = "both") #시차 2가 가장 큰작은 값을 가짐 
+```
+## 결과를 보면 각자 다른 차수를 추천
+```
+$selection
+AIC(n)  HQ(n)  SC(n) FPE(n) 
+3      2      1      3 
+```
+
+## sc가 추천해준 시차 1
+```{r}
+Canada <- Canada[, c("prod", "e", "U", "rw")]
+p1ct <- VAR(Canada, p = 1, type = "both")
+p1ct
+summary(p1ct, equation = "e") #e 시계열만  보여줌
+
+
+ser11 <- serial.test(p1ct, lags.pt = 16, type = "PT.asymptotic") #포트만토검정
+ser11$serial
+
+
+
+var.2c <- VAR(Canada, p = 2, type = "const")
+predict(var.2c, n.ahead = 8, ci = 0.95)
+```

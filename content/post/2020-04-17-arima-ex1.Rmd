@@ -1,0 +1,89 @@
+---
+title: ARIMA ex1
+author: 이현탁
+date: '2020-04-17'
+slug: arima-실습
+categories:
+  - R
+tags:
+  - R Markdown
+---
+# 기초단계
+
+```{r echo=FALSE, message=FALSE}
+library(forecast)
+```
+## AR(1)생성하기
+```{r}
+x<-arima.sim(list(ma=0.2), n=100)
+ts.plot(x, main="x")
+par(mfrow=c(3,1))
+acf(x, main="ACF")
+pacf(x, main="PACF")
+```
+
+## MA(1)생성하기
+```{r}
+x<-arima.sim(list(ma=0.8), n=100)
+ts.plot(x, main="x")
+par(mfrow=c(3,1))
+acf(x, main="ACF ")
+pacf(x, main="PACF ")
+```
+
+## ARMA(1,1)생성하기
+```{r}
+x<-arima.sim(list(ar=0.4, ma=-0.3), n=100)
+ts.plot(x, main="x")
+par(mfrow=c(3,1))
+acf(x, main="ACF ")
+pacf(x, main="PACF ") 
+```
+
+
+# 실습
+```{r}
+Y<-arima.sim(list(order=c(2,0,0), ar=c(0.3, 0.1)), n=100)
+```
+## 모형 식별하기
+```{r}
+ts.plot(Y)
+par(mfrow=c(2,1))
+acf(Y, main="ACF ")
+pacf(Y, main="PACF ")
+```
+## 모수 추정해보기
+```{r}
+TS1 <- arima(Y, c(2, 0, 0))
+TS1
+TS1 <- arima(Y, c(2, 0, 0), method=c("CSS-ML"))
+TS1
+TS1 <- arima(Y, c(2, 0, 0), method=c("ML"))
+TS1
+TS1 <- arima(Y, c(2, 0, 0), method=c("CSS"))
+TS1
+```
+## 모형 진단해보기
+```{r}
+tsdiag(TS1, gof.lag=14)
+```
+## 모형 예측하기
+```{r}
+future10<-predict(TS1, n.ahead=10)
+future10
+Upper<-future10$pred+future10$se
+Lower<-future10$pred-future10$se
+Upper
+Lower
+
+forecast(TS1,h=10)
+plot(forecast(TS1,h=10))
+
+```
+
+## 차수 식별
+
+```{r}
+auto.arima(Y)
+```
+

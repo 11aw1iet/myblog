@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>blogdown &amp; theme</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="이현탁" />
+    <meta name="date" content="2020-06-21" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# blogdown &amp; theme
+### 이현탁
+### 2020-06-21
+
+---
+
+
+
+
+
+---
+
+#1 blogdown 및 Hugo 설치하기
+
+ - r studio에서 간단한 명령어를 통해 설치 가능하다.
+```
+install.packages("blogdown")
+blogdown::install_hugo(version = latest)
+```
+
+---
+#2 Hugo theme 고르기
+
+ - [여기](https://themes.gohugo.io/)에서 원하는 테마를 고른다. 각 테마마다 설치방법이 다르지만, 공유되는 과정은 다음과 같다. 아래의 과정은 git bash로 수행한다.
+```
+## 프로젝트 폴더를 만들어 작업공간으로 지정한다
+```
+$ cd HUGO_PROJECT
+```
+## 원하는 테마를 clone해온다
+```
+$ git clone https://github.com/제작자/테마.git themes/테마
+```
+---
+#3 theme 
+
+## 혹은 submodule로 가져올 수도 있다. netlify 연결을 위해서는 이 편이 낫다.
+```
+$ git submodule add https://github.com/제작자/테마.git themes/테마
+```
+##위의 과정들이 완료되면 최신화를 한번 해주는 것이 좋다.
+```
+$ git submodule update --remote
+```
+---
+#4 사이트 생성
+
+ - 테마를 지정하지 않고도 생성한 뒤 적용하는 것이 가능하지만, 사이트 생성시부터 테마를 지정하는 것이 더 안정적이다.
+```
+blogdown::new_site(theme = "제작자/테마", hostname = "github.com", theme_example = TRUE)
+
+```
+---
+#5 사이트 관리
+
+
+ - 각 테마별로 index, config 등 관리 파일이 다르다. 블로그 정보, 형식에서 테마의 조정까지 많은 것을 관리할 수 있다. 테마를 지정했다면 테마의 example site나 개발자 github 등에서 사용법을 확인하는 것이 좋다. 테마에 따라 컨텐츠가 section인 경우와 post인 경우로 나뉜다. 확인 후에 글을 작성하는 것이 좋다.
+ 
+---
+#6 github 배포
+
+ - 위의 과정을 거쳤다면 git bash를 통해 github 저장소로 작성물을 push 한다.
+```
+git clone (github 주소)
+git add .
+git commit -m '작성단계'
+git push
+```
+
+---
+#7 netlify 연결
+
+ - 블로그 파일이 저장된 github 주소를 netlify의 deposit 대상으로 지정한다. 변환 형식을 'hugo'로, 기본 directory는 변경하지 않았다면 블로그 폴더의 'public'으로 지정하면 된다.
+ 이후 github에 변경사항이 있을 때마다 자동으로 갱신된다.
+ 
+_[결과물 예시](https://rhinoblog.netlify.app/)_
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

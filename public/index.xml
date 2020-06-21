@@ -41,21 +41,31 @@
     </item>
     
     <item>
-      <title>시계열 심화 실습</title>
-      <link>/2020/05/19/%EC%8B%9C%EA%B3%84%EC%97%B4-%EC%8B%AC%ED%99%94-%EC%8B%A4%EC%8A%B5/</link>
+      <title>시계열 심화</title>
+      <link>/2020/05/19/%EC%8B%9C%EA%B3%84%EC%97%B4-%EC%8B%AC%ED%99%94/</link>
       <pubDate>Tue, 19 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2020/05/19/%EC%8B%9C%EA%B3%84%EC%97%B4-%EC%8B%AC%ED%99%94-%EC%8B%A4%EC%8A%B5/</guid>
-      <description>BOX-COX 람다추정 하는법install.packages(&amp;quot;MASS&amp;quot;)library(MASS)x &amp;lt;- rexp(1000) # 지수분포로부터 난수를 발생시킨다.xpar(mfrow=c(1,2))hist(x)qqnorm(x) # 정규확률그림 생성par(mfrow=c(1,1))boxcox(x~1) # 로그-가능도 프로파일 생성install.packages(&amp;quot;car&amp;quot;)library(car)p &amp;lt;- powerTransform(x) # 박스-콕스 변환의 람다 추정py &amp;lt;- bcPower(x, p$lambda) # 박스-콕스 변환ypar(mfrow=c(1,2))hist(y)qqnorm(y) # 변환된 자료의 정규확률그림 생성VAR모형분석샘플을 생성한다set.seed(111)t &amp;lt;- 200 # Number of time series observationsk &amp;lt;- 2 # Number of endogenous variablesp &amp;lt;- 2 # Number of lagsGenerate coefficient matricesA.</description>
+      <guid>/2020/05/19/%EC%8B%9C%EA%B3%84%EC%97%B4-%EC%8B%AC%ED%99%94/</guid>
+      <description>BOX-COX 람다추정 하는법 x &amp;lt;- rexp(1000) # 지수분포로부터 난수를 발생시킨다.par(mfrow=c(1,2))hist(x)qqnorm(x) # 정규확률그림 생성 par(mfrow=c(1,1))boxcox(x~1) # 로그-가능도 프로파일 생성 p &amp;lt;- powerTransform(x) # 박스-콕스 변환의 람다 추정p## Estimated transformation parameter ## x ## 0.2631179 y &amp;lt;- bcPower(x, p$lambda) # 박스-콕스 변환par(mfrow=c(1,2))hist(y)qqnorm(y) # 변환된 자료의 정규확률그림 생성VAR모형분석샘플을 생성한다set.seed(111)t &amp;lt;- 200 # Number of time series observationsk &amp;lt;- 2 # Number of endogenous variablesp &amp;lt;- 2 # Number of lags상관계수 행렬 생성A.</description>
     </item>
     
     <item>
-      <title>ARIMA 실습</title>
+      <title>ARIMA ex2</title>
+      <link>/2020/04/21/arima-ex2/</link>
+      <pubDate>Tue, 21 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/04/21/arima-ex2/</guid>
+      <description>기초단계실습2x&amp;lt;-arima.sim(list(ma=0.7), n=100)par(mfrow=c(2,1))acf(x, main=&amp;quot;ACF &amp;quot;)pacf(x, main=&amp;quot;PACF &amp;quot;)모수 추정하기TS2 &amp;lt;- arima(x, c(0, 0, 1))TS2## ## Call:## arima(x = x, order = c(0, 0, 1))## ## Coefficients:## ma1 intercept## 0.7655 -0.0508## s.e. 0.0821 0.1907## ## sigma^2 estimated as 1.176: log likelihood = -150.44, aic = 306.89auto.arima(x)## Series: x ## ARIMA(0,0,1) with zero mean ## ## Coefficients:## ma1## 0.</description>
+    </item>
+    
+    <item>
+      <title>ARIMA ex1</title>
       <link>/2020/04/17/arima-%EC%8B%A4%EC%8A%B5/</link>
       <pubDate>Fri, 17 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/04/17/arima-%EC%8B%A4%EC%8A%B5/</guid>
-      <description>기초단계install.packages(&amp;quot;forecast&amp;quot;)library(forecast)AR(1)생성하기x&amp;lt;-arima.sim(list(ma=0.2), n=100)ts.plot(x, main=&amp;quot;x&amp;quot;)par(mfrow=c(3,1))acf(x, main=&amp;quot;ACF&amp;quot;)pacf(x, main=&amp;quot;PACF&amp;quot;)MA(1)생성하기x&amp;lt;-arima.sim(list(ma=0.8), n=100)ts.plot(x, main=&amp;quot;x&amp;quot;)par(mfrow=c(3,1))acf(x, main=&amp;quot;ACF &amp;quot;)pacf(x, main=&amp;quot;PACF &amp;quot;)ARMA(1,1)생성하기x&amp;lt;-arima.sim(list(ar=0.4, ma=-0.3), n=100)ts.plot(x, main=&amp;quot;x&amp;quot;)par(mfrow=c(3,1))acf(x, main=&amp;quot;ACF &amp;quot;)pacf(x, main=&amp;quot;PACF &amp;quot;) 실습Y&amp;lt;-arima.sim(list(order=c(2,0,0), ar=c(0.3, 0.1)), n=100)모형 식별하기ts.plot(Y)par(mfrow=c(2,1))acf(Y, main=&amp;quot;ACF &amp;quot;)pacf(Y, main=&amp;quot;PACF &amp;quot;)모수 추정해보기TS1 &amp;lt;- arima(Y, c(2, 0, 0))TS1TS1 &amp;lt;- arima(Y, c(2, 0, 0), method=c(&amp;quot;CSS-ML&amp;quot;))TS1TS1 &amp;lt;- arima(Y, c(2, 0, 0), method=c(&amp;quot;ML&amp;quot;))TS1TS1 &amp;lt;- arima(Y, c(2, 0, 0), method=c(&amp;quot;CSS&amp;quot;))TS1모형 진단해보기tsdiag(TS1, gof.</description>
+      <description>기초단계AR(1)생성하기x&amp;lt;-arima.sim(list(ma=0.2), n=100)ts.plot(x, main=&amp;quot;x&amp;quot;)par(mfrow=c(3,1))acf(x, main=&amp;quot;ACF&amp;quot;)pacf(x, main=&amp;quot;PACF&amp;quot;)MA(1)생성하기x&amp;lt;-arima.sim(list(ma=0.8), n=100)ts.plot(x, main=&amp;quot;x&amp;quot;)par(mfrow=c(3,1))acf(x, main=&amp;quot;ACF &amp;quot;)pacf(x, main=&amp;quot;PACF &amp;quot;)ARMA(1,1)생성하기x&amp;lt;-arima.sim(list(ar=0.4, ma=-0.3), n=100)ts.plot(x, main=&amp;quot;x&amp;quot;)par(mfrow=c(3,1))acf(x, main=&amp;quot;ACF &amp;quot;)pacf(x, main=&amp;quot;PACF &amp;quot;) 실습Y&amp;lt;-arima.sim(list(order=c(2,0,0), ar=c(0.3, 0.1)), n=100)모형 식별하기ts.plot(Y)par(mfrow=c(2,1))acf(Y, main=&amp;quot;ACF &amp;quot;)pacf(Y, main=&amp;quot;PACF &amp;quot;)## 모수 추정해보기
+TS1 &amp;lt;- arima(Y, c(2, 0, 0))TS1## ## Call:## arima(x = Y, order = c(2, 0, 0))## ## Coefficients:## ar1 ar2 intercept## 0.</description>
     </item>
     
     <item>
