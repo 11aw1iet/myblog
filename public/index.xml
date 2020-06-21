@@ -35,9 +35,7 @@
       <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/06/16/blogdown%EC%9C%BC%EB%A1%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A7%8C%EB%93%A4%EC%96%B4%EC%84%9C-%ED%85%8C%EB%A7%88-%EC%A0%81%EC%9A%A9%EC%8B%9C%ED%82%A4%EA%B8%B0/</guid>
-      <description>#1 blogdown 및 Hugo 설치하기
-r studio에서 간단한 명령어를 통해 설치 가능하다.install.packages(&amp;quot;blogdown&amp;quot;)blogdown::install_hugo(version = latest)#2 Hugo theme 고르기
-여기에서 원하는 테마를 고른다. 각 테마마다 설치방법이 다르지만, 공유되는 과정은 다음과 같다. 아래의 과정은 git bash로 수행한다.# 프로젝트 폴더를 만들어 작업공간으로 지정한다$ cd HUGO_PROJECT# 원하는 테마를 clone해온다$ git clone https://github.com/제작자/테마.git themes/테마# 혹은 submodule로 가져올 수도 있다. netlify 연결을 위해서는 이 편이 낫다.</description>
+      <description>blogdown 및 Hugo 설치하기r studio에서 간단한 명령어를 통해 설치 가능하다.install.packages(&amp;quot;blogdown&amp;quot;)blogdown::install_hugo(version = latest)Hugo theme 고르기여기에서 원하는 테마를 고른다. 각 테마마다 설치방법이 다르지만, 공유되는 과정은 다음과 같다. 아래의 과정은 git bash로 수행한다.# 프로젝트 폴더를 만들어 작업공간으로 지정한다$ cd HUGO_PROJECT# 원하는 테마를 clone해온다$ git clone https://github.com/제작자/테마.git themes/테마# 혹은 submodule로 가져올 수도 있다. netlify 연결을 위해서는 이 편이 낫다.</description>
     </item>
     
     <item>
@@ -69,12 +67,12 @@ TS1 &amp;lt;- arima(Y, c(2, 0, 0))TS1## ## Call:## arima(x = Y, order = c(2, 
     </item>
     
     <item>
-      <title>About</title>
+      <title>Resume</title>
       <link>/about/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
       <guid>/about/</guid>
-      <description>이현탁의 블로그입니다</description>
+      <description>이현탁(Hyeontak Lee)  연세대학교 응용통계학과 : 학부생 서울특별시 서대문구 연희동 11aw1iet@naver.com github.com/11aw1iet R 공부중  학력  하남고등학교 졸업(2011~2013) 송파스카이에듀 재수학원(2014) 연세대학교 응용통계학과 재학(2015~)  경력  하남고등학교 환경정화 동아리 &amp;ldquo;수피아&amp;rdquo;(2011~2012) 응용통계학과 밴드 &amp;ldquo;스밴&amp;rdquo; : 보컬(2015) 대한민국 육군 포병대 : 견인포 운전병(2016~2018) 맛집탐방 동아리 &amp;ldquo;미어캣&amp;rdquo;(2018) 보드게임 동아리 &amp;ldquo;홍보동&amp;rdquo;(2019) 독서토론 소모임 &amp;ldquo;책책짹짹&amp;rdquo;: 창설 및 운영(2020)  기여 프로젝트  서울시 수소충전소 입지 선정(2020)  이수과목  통계학 입문 : 김철응 미분적분학 : 이호규 선형대수 : 이호규 컴퓨터 자료처리 : 한선우 금융리스크 관리 실무와 통계학 : 김상철 통계방법론 : 김아현 수리통계학(1) : 박태영 표본추출이론 : 강상욱 회귀분석 : 김현태 확률과정 : 박태영  </description>
     </item>
     
   </channel>

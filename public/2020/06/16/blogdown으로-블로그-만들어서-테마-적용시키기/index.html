@@ -46,11 +46,11 @@
 
   <ul class="nav-links">
     
-    <li><a href="/about/">About</a></li>
-    
     <li><a href="https://github.com/11aw1iet">GitHub</a></li>
     
-    <li><a href="/resume/">RESUME</a></li>
+    <li><a href="/about/">Resume</a></li>
+    
+    <li><a href="/resume/">RESUME in pdf</a></li>
     
   </ul>
 </nav>
@@ -73,15 +73,19 @@
 
     <div class="article-content">
       
+<script src="2020-06-16-blogdown으로-블로그-만들어서-테마-적용시키기_files/header-attrs/header-attrs.js"></script>
 
 
-<p>#1 blogdown 및 Hugo 설치하기</p>
+<div id="blogdown-및-hugo-설치하기" class="section level1">
+<h1>blogdown 및 Hugo 설치하기</h1>
 <ul>
 <li>r studio에서 간단한 명령어를 통해 설치 가능하다.</li>
 </ul>
 <pre><code>install.packages(&quot;blogdown&quot;)
 blogdown::install_hugo(version = latest)</code></pre>
-<p>#2 Hugo theme 고르기</p>
+</div>
+<div id="hugo-theme-고르기" class="section level1">
+<h1>Hugo theme 고르기</h1>
 <ul>
 <li><a href="https://themes.gohugo.io/">여기</a>에서 원하는 테마를 고른다. 각 테마마다 설치방법이 다르지만, 공유되는 과정은 다음과 같다. 아래의 과정은 git bash로 수행한다.</li>
 </ul>
@@ -93,6 +97,10 @@ $ git clone https://github.com/제작자/테마.git themes/테마
 
 # 혹은 submodule로 가져올 수도 있다. netlify 연결을 위해서는 이 편이 낫다.
 $ git submodule add https://github.com/제작자/테마.git themes/테마</code></pre>
+<div class="figure">
+<img src="%22/post/hugo1.png/%22" style="width:80.0%" height="500" alt="" />
+<p class="caption">Thank you for visit</p>
+</div>
 <p>#3 사이트 생성</p>
 <ul>
 <li>테마를 지정하지 않고도 생성한 뒤 적용하는 것이 가능하지만, 사이트 생성시부터 테마를 지정하는 것이 더 안정적이다.</li>
@@ -116,6 +124,7 @@ git push</code></pre>
 <li>블로그 파일이 저장된 github 주소를 netlify의 deposit 대상으로 지정한다. 변환 형식을 ’hugo’로, 기본 directory는 변경하지 않았다면 블로그 폴더의 ’public’으로 지정하면 된다.
 이후 github에 변경사항이 있을 때마다 자동으로 갱신된다.</li>
 </ul>
+</div>
 <div id="결과물-예시" class="section level1">
 <h1><a href="https://rhinoblog.netlify.app/">결과물 예시</a></h1>
 </div>

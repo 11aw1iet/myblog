@@ -35,9 +35,7 @@
       <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/06/16/blogdown%EC%9C%BC%EB%A1%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A7%8C%EB%93%A4%EC%96%B4%EC%84%9C-%ED%85%8C%EB%A7%88-%EC%A0%81%EC%9A%A9%EC%8B%9C%ED%82%A4%EA%B8%B0/</guid>
-      <description>#1 blogdown 및 Hugo 설치하기
-r studio에서 간단한 명령어를 통해 설치 가능하다.install.packages(&amp;quot;blogdown&amp;quot;)blogdown::install_hugo(version = latest)#2 Hugo theme 고르기
-여기에서 원하는 테마를 고른다. 각 테마마다 설치방법이 다르지만, 공유되는 과정은 다음과 같다. 아래의 과정은 git bash로 수행한다.# 프로젝트 폴더를 만들어 작업공간으로 지정한다$ cd HUGO_PROJECT# 원하는 테마를 clone해온다$ git clone https://github.com/제작자/테마.git themes/테마# 혹은 submodule로 가져올 수도 있다. netlify 연결을 위해서는 이 편이 낫다.</description>
+      <description>blogdown 및 Hugo 설치하기r studio에서 간단한 명령어를 통해 설치 가능하다.install.packages(&amp;quot;blogdown&amp;quot;)blogdown::install_hugo(version = latest)Hugo theme 고르기여기에서 원하는 테마를 고른다. 각 테마마다 설치방법이 다르지만, 공유되는 과정은 다음과 같다. 아래의 과정은 git bash로 수행한다.# 프로젝트 폴더를 만들어 작업공간으로 지정한다$ cd HUGO_PROJECT# 원하는 테마를 clone해온다$ git clone https://github.com/제작자/테마.git themes/테마# 혹은 submodule로 가져올 수도 있다. netlify 연결을 위해서는 이 편이 낫다.</description>
     </item>
     
     <item>

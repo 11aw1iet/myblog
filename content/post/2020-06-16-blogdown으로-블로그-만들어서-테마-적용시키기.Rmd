@@ -9,7 +9,7 @@ tags:
   - R Markdown
 ---
 
-#1 blogdown 및 Hugo 설치하기
+# blogdown 및 Hugo 설치하기
 
  - r studio에서 간단한 명령어를 통해 설치 가능하다.
 ```
@@ -18,7 +18,7 @@ blogdown::install_hugo(version = latest)
 ```
 
 
-#2 Hugo theme 고르기
+# Hugo theme 고르기
 
  - [여기](https://themes.gohugo.io/)에서 원하는 테마를 고른다. 각 테마마다 설치방법이 다르지만, 공유되는 과정은 다음과 같다. 아래의 과정은 git bash로 수행한다.
 ```
@@ -31,6 +31,8 @@ $ git clone https://github.com/제작자/테마.git themes/테마
 # 혹은 submodule로 가져올 수도 있다. netlify 연결을 위해서는 이 편이 낫다.
 $ git submodule add https://github.com/제작자/테마.git themes/테마
 ```
+
+![Thank you for visit ]("/post/hugo1.png/"){width=80% height=500px}
 
 #3 사이트 생성
 
